@@ -946,6 +946,119 @@ textarea.contact_form_textarea::placeholder {
   margin-right: 0;
 }
 
+/* Table */
+
+
+.table {
+  margin: 30px auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.tableBtn {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly
+}
+
+.table_clients {
+  margin: 15px auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.table_base {
+  font-size: 17px;
+  font-weight: 500;
+  padding: 3px;
+  border: solid 1px rgb(8, 4, 255) ;
+}
+
+.cleint:hover {
+  background-color: #64dbff;
+}
+
+.cleint.action {
+  background-color: #00fff7;
+}
+
+.cleint_item {
+  font-size: 15px;
+}
+
+/* Form */
+
+
+.form {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.form.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.form_content {
+  text-align: center;
+  width: 300px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.form_inputt {
+  width: 140px;
+  height: 20px;
+  margin: 0 15px 15px;
+}
+
+
+/* Modal */
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal_content {
+  text-align: center;
+  width: 300px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.modal_inputt {
+  width: 140px;
+  height: 20px;
+  margin: 0 15px 15px;
+}
 
 @media (max-width: 960px) {
 

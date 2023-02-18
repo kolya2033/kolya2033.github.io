@@ -3,6 +3,7 @@ import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
+import Table from './components/table/Table';
 
 class App extends Component {
 
@@ -33,6 +34,7 @@ class App extends Component {
         <div className="App">
             <Header/>
             <Main fixedHeader={fixedHeader} isActive={isActive} handleToggle={this.handleToggle}/>
+            <Table/>
             <Footer/>
         </div>
     );

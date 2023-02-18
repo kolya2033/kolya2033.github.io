@@ -15,7 +15,7 @@ class Intro extends Component {
         return (
             <>
                 <div className="intro">
-                        <div className={`header ${fixedHeader ? "fixed" : null}`}>
+                        <div className={`header ${fixedHeader ? "fixed" : ''}`}>
                             <div className="header_inner">
                                 <div className="header_logo">
                                     <img className="header_logo_img" src={logo} alt="Logo"></img>
@@ -24,8 +24,8 @@ class Intro extends Component {
                                 </div>
 
                                 <div className={`nav ${isActive ? "active" : null}`}>
-                                    {this.state.nav.map((item) => (
-                                        <a href="#" className="nav_link">{item}</a>
+                                    {this.state.nav.map((item, i) => (
+                                        <a key={i} href="#" className="nav_link">{item}</a>
                                     ))}
                                 </div>
 

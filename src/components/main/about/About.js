@@ -24,7 +24,7 @@ class About extends Component {
                     <div className="video">
                         <div className="container">
                             <div className="about_contant">
-                                <i class="fa-regular fa-circle-play"></i>
+                                <i className="fa-regular fa-circle-play"></i>
                                 <h3 className="video_title">Watch our story</h3>
                             </div>
                         </div>
