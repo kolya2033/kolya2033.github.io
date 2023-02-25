@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ModalView from './ModalView'
 
 class Modal extends Component {
     constructor(props){
@@ -43,22 +44,7 @@ class Modal extends Component {
     render() {
         return (
             <>
-                <div  className={this.props.modalActive ? "modal active" : "modal"} onClick={() => this.props.onModalChange(false)}>
-                    <form 
-                        onClick={e => e.stopPropagation()}
-                        className="modal_content"
-                        onSubmit={this.onSubmit}>
-                        <input 
-                            className="modal_inputt"
-                            type="text" 
-                            name="property"
-                            value={this.state.value}
-                            onChange={(e) => this.onItemChange(e)}/>
-                        <button 
-                            type="submit"
-                            className="btn">Change</button>
-                    </form>
-                </div>
+                <ModalView modalActive={this.props.modalActive} onModalChange={this.props.onModalChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} value={this.state.value}/>
             </>
         )
     }

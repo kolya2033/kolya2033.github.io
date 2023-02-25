@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import Services from '../../Services'
-import Form from './Form'
-import Modal from './Modal'
+import Services from '../../../Services'
+import TableView from './TableView'
 
 class Table extends Component {
     constructor(props) {
@@ -107,7 +106,7 @@ class Table extends Component {
     }
 
     onChangeClient = (value) => {
-        let modList = this.state.list.concat();
+        let modList = [...this.state.list]
         let index
         index = modList.findIndex(n => n.id === this.state.clientId)
         switch (this.state.modalProperty) {
@@ -127,39 +126,23 @@ class Table extends Component {
 
     render() {
         return (
-            <div className='table'>
-                <Form onChangeClientList={this.onChangeClientList} onFormChange={this.onFormChange} formActive={this.state.formActive}/>
-                <Modal onChangeClient={this.onChangeClient} onModalChange={this.onModalChange} modalActive={this.state.modalActive}/>
-                <div className='tableBtn'>
-                    <button className='btn' onClick={this.addNewClient}>add new client</button>
-                    <button className='btn' onClick={this.deletClient}>delet client</button>
-                </div>
-                <br />
-                <div className='tableBtn'>
-                    <button className='btn' onClick={() => this.openModal('name')}>change name</button>
-                    <button className='btn' onClick={() => this.openModal('username')}>change username</button>
-                    <button className='btn' onClick={() => this.openModal('company')}>change company</button>
-                </div>
-                
-                <table className="table_clients">
-                    <tr>
-                        <td className="table_base" onClick={() => this.sortClientsList('id')}>id</td>
-                        <td className="table_base" onClick={() => this.sortClientsList('name')}>name</td>
-                        <td className="table_base" onClick={() => this.sortClientsList('username')}>username</td>
-                        <td className="table_base" onClick={() => this.sortClientsList('company')}>company</td>
-                    </tr>
-                    {
-                        this.state.list.map((item, i) => (
-                            <tr className={`cleint ${item.id === this.state.clientId ? "action" : ''}`} key={i} onClick={() => this.selectClient(item.id)}>
-                                <td className="cleint_item">{item.id}</td>
-                                <td className="cleint_item">{item.name}</td>
-                                <td className="cleint_item">{item.username}</td>
-                                <td className="cleint_item">{item.company.name}</td>
-                            </tr>
-                        ))
-                    }
-                </table>
-            </div>
+            <>
+                <TableView 
+                onChangeClientList={this.onChangeClientList}
+                onFormChange={this.onFormChange} 
+                formActive={this.state.formActive} 
+                onChangeClient={this.onChangeClient} 
+                onModalChange={this.onModalChange} 
+                modalActive={this.state.modalActive} 
+                addNewClient={this.addNewClient} 
+                deletClient={this.deletClient}
+                openModal={this.openModal}
+                sortClientsList={this.sortClientsList}
+                list={this.state.list}
+                clientId={this.state.clientId}
+                selectClient={this.selectClient}/>
+            </>
+            
         )
     }
 }

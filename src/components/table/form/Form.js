@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FormView from './FormView'
 
 class Form extends Component {
 
@@ -70,40 +71,7 @@ class Form extends Component {
         const {name, username, company} = this.state.client
         return (
             <>
-                <div  className={this.props.formActive ? "form active" : "form"} onClick={() => this.props.onFormChange(false)}>
-                    <form 
-                        onClick={e => e.stopPropagation()}
-                        className="form_content"
-                        onSubmit={this.onSubmit}>
-                        <h3 style={{'fontSize': '23px', "marginBottom" : 5}}>name</h3>
-                        <input 
-                            className="form_inputt"
-                            type="text" 
-                            name="name"
-                            value={name}
-                            onChange={(e) => this.onItemChange('name' ,e)}/>
-
-                        <h3 style={{'fontSize': '23px', "marginBottom" : 5}}>username</h3>
-                        <input 
-                            className="form_inputt"
-                            type="text" 
-                            name="username"
-                            value={username}
-                            onChange={(e) => this.onItemChange('username' ,e)}/>
-
-                        <h3 style={{'fontSize': '23px', "marginBottom" : 5}}>company</h3>
-                        <input 
-                            className="form_inputt"
-                            type="text" 
-                            name="company"
-                            value={company.name}
-                            onChange={(e) => this.onItemChange('company' ,e)}/>
-                        
-                        <button 
-                            type="submit"
-                            className="btn">Subscribe</button>
-                    </form>
-                </div>
+                <FormView name={name} username={username} company={company} onFormChange={this.props.onFormChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} formActive={this.props.formActive}/>
             </>
         )
     }

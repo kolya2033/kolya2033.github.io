@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FooterView from './FooterView'
 
 class Footer extends Component {
     state = {
@@ -10,13 +11,7 @@ class Footer extends Component {
         const {design, github} = this.state
         return (
             <>
-                <footer className="project_footer">
-                    <p className="author">
-                        Игнатенко Николай <br></br>
-                        ссылка на оригинал дизайна: {design} <br></br>
-                        ссылка на github аккаунт: {github}
-                    </p>
-                </footer>
+                <FooterView design={design} github={github}/>
             </>
         )
     }
