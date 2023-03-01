@@ -107,13 +107,19 @@ class Table extends Component {
         index = modList.findIndex(n => n.id === this.state.clientId)
         switch (this.state.modalProperty) {
             case 'name':
-                modList[index].name = value
+                this.setState(({list}) => ({
+                    list: list.map(item => item.id === this.state.clientId ? {...item, name: value} : item)
+                }))
                 break;
             case 'username':
-                modList[index].username = value
+                this.setState(({list}) => ({
+                    list: list.map(item => item.id === this.state.clientId ? {...item, username: value} : item)
+                }))
                 break;
             case 'company':
-                modList[index].company.name = value
+                this.setState(({list}) => ({
+                    list: list.map(item => item.id === this.state.clientId ? {...item, company:{...item.company, ...{name: value}}} : item)
+                }))
                 break;
             default:
                 break;

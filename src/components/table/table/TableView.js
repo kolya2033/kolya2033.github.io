@@ -35,6 +35,7 @@ class TableView extends Component {
                         <td className="table_base" onClick={() => sortClientsList('username')}>username</td>
                         <td className="table_base" onClick={() => sortClientsList('company')}>company</td>
                     </tr>
+                    {console.log(list)}
                     {
                         list.map((item, i) => (
                             <tr className={`cleint ${item.id === clientId ? "action" : ''}`} key={i} onClick={() => selectClient(item.id)}>
