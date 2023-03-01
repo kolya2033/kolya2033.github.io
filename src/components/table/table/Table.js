@@ -66,12 +66,8 @@ class Table extends Component {
 
     deletClient = () => {
         let modList = this.state.list.concat();
-        let index
-        index = modList.findIndex(n => n.id === this.state.clientId)
-        if (index !== -1) {
-            modList.splice(index, 1);
-        }
-        this.setState({list: modList})
+        const res = modList.filter(item => item.id !== this.state.clientId)
+        this.setState({list: res})
     }
 
     addNewClient = () => {
@@ -93,9 +89,9 @@ class Table extends Component {
     onChangeClientList = (client) => {
         let modlist = this.state.list.concat();
         let modClient = {...client, id: modlist.pop().id + 1}
-        this.setState({
-            list: [...this.state.list, modClient]
-        })
+        this.setState(({list}) => ({
+            list: [...list, modClient]
+        }))
     }
 
     openModal = (property) => {
@@ -125,24 +121,22 @@ class Table extends Component {
     }
 
     render() {
+        const {formActive, modalActive, list, clientId} = this.state
         return (
-            <>
-                <TableView 
-                onChangeClientList={this.onChangeClientList}
-                onFormChange={this.onFormChange} 
-                formActive={this.state.formActive} 
-                onChangeClient={this.onChangeClient} 
-                onModalChange={this.onModalChange} 
-                modalActive={this.state.modalActive} 
-                addNewClient={this.addNewClient} 
-                deletClient={this.deletClient}
-                openModal={this.openModal}
-                sortClientsList={this.sortClientsList}
-                list={this.state.list}
-                clientId={this.state.clientId}
-                selectClient={this.selectClient}/>
-            </>
-            
+            <TableView 
+            onChangeClientList={this.onChangeClientList}
+            onFormChange={this.onFormChange} 
+            formActive={formActive} 
+            onChangeClient={this.onChangeClient} 
+            onModalChange={this.onModalChange} 
+            modalActive={modalActive} 
+            addNewClient={this.addNewClient} 
+            deletClient={this.deletClient}
+            openModal={this.openModal}
+            sortClientsList={this.sortClientsList}
+            list={list}
+            clientId={clientId}
+            selectClient={this.selectClient}/>
         )
     }
 }

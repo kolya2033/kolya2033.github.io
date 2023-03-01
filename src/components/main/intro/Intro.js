@@ -11,12 +11,14 @@ class Intro extends Component {
 
     render() {
         const {fixedHeader, isActive, handleToggle} = this.props
+        const {nav} = this.state
 
         return (
-            <>
-                <IntroView fixedHeader={fixedHeader} isActive={isActive} handleToggle={handleToggle} nav={this.state.nav}/>
-
-            </>
+            <IntroView 
+                fixedHeader={fixedHeader} 
+                isActive={isActive} 
+                handleToggle={handleToggle} 
+                nav={nav}/>
         )
     }
 }

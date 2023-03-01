@@ -17,18 +17,16 @@ class Main extends Component {
         const {fixedHeader, isActive, handleToggle} = this.props
 
         return (
-            <>
-                <main>
-                    <Intro fixedHeader={fixedHeader} isActive={isActive} handleToggle={handleToggle}/>
-                    <About/>
-                    <Expertise/>
-                    <Team/>
-                    <Works/>
-                    <Testimonials/>
-                    <Contact/>
-                    <WebsiteFooter/>
-                </main>
-            </>
+            <main>
+                <Intro fixedHeader={fixedHeader} isActive={isActive} handleToggle={handleToggle}/>
+                <About/>
+                <Expertise/>
+                <Team/>
+                <Works/>
+                <Testimonials/>
+                <Contact/>
+                <WebsiteFooter/>
+            </main>
         )
     }
 }

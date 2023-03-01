@@ -10,9 +10,7 @@ class Footer extends Component {
     render() {
         const {design, github} = this.state
         return (
-            <>
-                <FooterView design={design} github={github}/>
-            </>
+            <FooterView design={design} github={github}/>
         )
     }
 }

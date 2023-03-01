@@ -25,19 +25,19 @@ class App extends Component {
     };    
 
     handleToggle = () => {
-        this.setState({ isActive: !this.state.isActive });
+        this.setState(({ isActive }) => ({ isActive: !isActive }));
     };
 
     render() {
         const {fixedHeader, isActive} = this.state
         return (
-        <div className="App">
-            <Header/>
-            <Main fixedHeader={fixedHeader} isActive={isActive} handleToggle={this.handleToggle}/>
-            <Table/>
-            <Footer/>
-        </div>
-    );
+            <div className="App">
+                <Header/>
+                <Main fixedHeader={fixedHeader} isActive={isActive} handleToggle={this.handleToggle}/>
+                <Table/>
+                <Footer/>
+            </div>
+        );
   }
 }
 

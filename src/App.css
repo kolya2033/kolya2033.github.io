@@ -1004,6 +1004,11 @@ textarea.contact_form_textarea::placeholder {
   transition: 0.5s;
 }
 
+.form_title {
+  font-size: 23px;
+  margin-bottom: 5;
+}
+
 .form.active {
   opacity: 1;
   pointer-events: all;

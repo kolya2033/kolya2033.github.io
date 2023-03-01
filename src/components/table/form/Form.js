@@ -17,7 +17,7 @@ class Form extends Component {
         }
     }
     
-    componentDidUpdate() {
+    componentDidMount() {
         window.addEventListener('keydown', this.onkeyDown)
     }
 
@@ -48,31 +48,21 @@ class Form extends Component {
     }
 
     onItemChange = (item, e) => {
-        if(item === 'company') {
-            this.setState({
-                client: {
-                    ...this.state.client,
-                    company: {
-                        name: e.target.value
-                    }
-                }
-            })
-        } else {
-            this.setState({
-                client: {
-                    ...this.state.client,
-                    [item]: e.target.value
-                }
-            })
-        }
+        this.setState(({client}) => ({
+            client: {
+                ...client,
+                ...(item === 'company' 
+                        ? {company: {name: e.target.value}}
+                        : {[item]: e.target.value}) 
+            }
+        }))
     }
 
     render() {
         const {name, username, company} = this.state.client
+        const {onFormChange, formActive} = this.props
         return (
-            <>
-                <FormView name={name} username={username} company={company} onFormChange={this.props.onFormChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} formActive={this.props.formActive}/>
-            </>
+            <FormView name={name} username={username} company={company} onFormChange={onFormChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} formActive={formActive}/>
         )
     }
 }

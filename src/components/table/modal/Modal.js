@@ -10,7 +10,7 @@ class Modal extends Component {
     }
 
         
-    componentDidUpdate() {
+    componentDidMount() {
         window.addEventListener('keydown', this.onkeyDown)
     }
 
@@ -23,7 +23,6 @@ class Modal extends Component {
             this.props.onModalChange(false)
         }
     }
-
 
     onItemChange = (e) => {
         this.setState({
@@ -42,10 +41,15 @@ class Modal extends Component {
 
 
     render() {
+        const {value} = this.state
+        const {modalActive, onModalChange} = this.props
         return (
-            <>
-                <ModalView modalActive={this.props.modalActive} onModalChange={this.props.onModalChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} value={this.state.value}/>
-            </>
+            <ModalView 
+                modalActive={modalActive} 
+                onModalChange={onModalChange} 
+                onSubmit={this.onSubmit} 
+                onItemChange={this.onItemChange} 
+                value={value}/>
         )
     }
 }

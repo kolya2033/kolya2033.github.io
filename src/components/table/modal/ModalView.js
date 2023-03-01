@@ -2,25 +2,24 @@ import React, { Component } from 'react'
 
 class ModalView extends Component {
     render() {
+        const {modalActive, onModalChange, onSubmit, onItemChange, value} = this.props
         return (
-            <>
-               <div  className={this.props.modalActive ? "modal active" : "modal"} onClick={() => this.props.onModalChange(false)}>
-                    <form 
-                        onClick={e => e.stopPropagation()}
-                        className="modal_content"
-                        onSubmit={this.props.onSubmit}>
-                        <input 
-                            className="modal_inputt"
-                            type="text" 
-                            name="property"
-                            value={this.props.value}
-                            onChange={(e) => this.props.onItemChange(e)}/>
-                        <button 
-                            type="submit"
-                            className="btn">Change</button>
-                    </form>
-                </div> 
-            </>
+            <div  className={modalActive ? "modal active" : "modal"} onClick={() => onModalChange(false)}>
+                <form 
+                    onClick={e => e.stopPropagation()}
+                    className="modal_content"
+                    onSubmit={onSubmit}>
+                    <input 
+                        className="modal_inputt"
+                        type="text" 
+                        name="property"
+                        value={value}
+                        onChange={(e) => onItemChange(e)}/>
+                    <button 
+                        type="submit"
+                        className="btn">Change</button>
+                </form>
+            </div> 
         )
     }
 }

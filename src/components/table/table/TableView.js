@@ -4,42 +4,49 @@ import Modal from '../modal/Modal'
 
 class TableView extends Component {
     render() {
+        const {onChangeClientList, onFormChange, formActive, onChangeClient, onModalChange, modalActive, addNewClient, deletClient, openModal, sortClientsList, clientId, list, selectClient} = this.props
         return (
-            <>  
-                <div className='table'>
-                    <Form onChangeClientList={this.props.onChangeClientList} onFormChange={this.props.onFormChange} formActive={this.props.formActive}/>
-                    <Modal onChangeClient={this.props.onChangeClient} onModalChange={this.props.onModalChange} modalActive={this.props.modalActive}/>
-                    <div className='tableBtn'>
-                        <button className='btn' onClick={this.props.addNewClient}>add new client</button>
-                        <button className='btn' onClick={this.props.deletClient}>delet client</button>
-                    </div>
-                    <br />
-                    <div className='tableBtn'>
-                        <button className='btn' onClick={() => this.props.openModal('name')}>change name</button>
-                        <button className='btn' onClick={() => this.props.openModal('username')}>change username</button>
-                        <button className='btn' onClick={() => this.props.openModal('company')}>change company</button>
-                    </div>
+            <div className='table'>
+                <Form 
+                    onChangeClientList={onChangeClientList} 
+                    onFormChange={onFormChange} 
+                    formActive={formActive}/>
+
+                <Modal 
+                    onChangeClient={onChangeClient} 
+                    onModalChange={onModalChange} 
+                    modalActive={modalActive}/>
                     
-                    <table className="table_clients">
-                        <tr>
-                            <td className="table_base" onClick={() => this.props.sortClientsList('id')}>id</td>
-                            <td className="table_base" onClick={() => this.props.sortClientsList('name')}>name</td>
-                            <td className="table_base" onClick={() => this.props.sortClientsList('username')}>username</td>
-                            <td className="table_base" onClick={() => this.props.sortClientsList('company')}>company</td>
-                        </tr>
-                        {
-                            this.props.list.map((item, i) => (
-                                <tr className={`cleint ${item.id === this.props.clientId ? "action" : ''}`} key={i} onClick={() => this.props.selectClient(item.id)}>
-                                    <td className="cleint_item">{item.id}</td>
-                                    <td className="cleint_item">{item.name}</td>
-                                    <td className="cleint_item">{item.username}</td>
-                                    <td className="cleint_item">{item.company.name}</td>
-                                </tr>
-                            ))
-                        }
-                    </table>
-                </div> 
-            </>
+                <div className='tableBtn'>
+                    <button className='btn' onClick={addNewClient}>add new client</button>
+                    <button className='btn' onClick={deletClient}>delet client</button>
+                </div>
+                <br />
+                <div className='tableBtn'>
+                    <button className='btn' onClick={() => openModal('name')}>change name</button>
+                    <button className='btn' onClick={() => openModal('username')}>change username</button>
+                    <button className='btn' onClick={() => openModal('company')}>change company</button>
+                </div>
+                
+                <table className="table_clients">
+                    <tr>
+                        <td className="table_base" onClick={() => sortClientsList('id')}>id</td>
+                        <td className="table_base" onClick={() => sortClientsList('name')}>name</td>
+                        <td className="table_base" onClick={() => sortClientsList('username')}>username</td>
+                        <td className="table_base" onClick={() => sortClientsList('company')}>company</td>
+                    </tr>
+                    {
+                        list.map((item, i) => (
+                            <tr className={`cleint ${item.id === clientId ? "action" : ''}`} key={i} onClick={() => selectClient(item.id)}>
+                                <td className="cleint_item">{item.id}</td>
+                                <td className="cleint_item">{item.name}</td>
+                                <td className="cleint_item">{item.username}</td>
+                                <td className="cleint_item">{item.company.name}</td>
+                            </tr>
+                        ))
+                    }
+                </table>
+            </div> 
         )
     }
 }
