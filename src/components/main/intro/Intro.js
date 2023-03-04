@@ -9,6 +9,10 @@ class Intro extends Component {
         }
     }
 
+    imgLoaded = () =>  console.log('successful upload')
+
+    imgLoadingError = () => console.log('loading error')
+
     render() {
         const {fixedHeader, isActive, handleToggle} = this.props
         const {nav} = this.state
@@ -18,7 +22,10 @@ class Intro extends Component {
                 fixedHeader={fixedHeader} 
                 isActive={isActive} 
                 handleToggle={handleToggle} 
-                nav={nav}/>
+                nav={nav}
+                imgLoaded={this.imgLoaded}
+                imgLoadingError={this.imgLoadingError}
+                />
         )
     }
 }

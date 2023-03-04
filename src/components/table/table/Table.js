@@ -8,15 +8,18 @@ class Table extends Component {
         this.state = {
             list: [],
             clientId: 0,
+            clientOrder: 0,
             modalActive: false,
             formActive: false,
-            modalProperty: ''
+            modalProperty: '',
+            currentClient: null
         }
     }
     
     services = new Services()
 
     onTableLoaded = (res) => {
+        res.map((item, i) => item.order = i + 1)
         this.setState({list: res})
     }
 
@@ -24,14 +27,42 @@ class Table extends Component {
         this.services
             .getResource()
             .then(this.onTableLoaded)
+        window.addEventListener('keydown', this.onkeyDown)
     }
 
-    sortArray = (arr) => {
-        
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.onkeyDown)
+    }
+
+    onkeyDown = (e) => {
+        if ((e.key === 'ArrowDown') && this.state.clientOrder < 10) {
+            let test 
+            this.state.list.forEach(item => {
+                if(item.order === this.state.clientOrder + 1){
+                    test =  item.id
+                }
+            })
+            this.setState(({clientOrder}) => ({
+                clientOrder: clientOrder + 1,
+                clientId: test
+            }))
+        } if ((e.key === 'ArrowUp') && this.state.clientOrder > 1) {
+            let test 
+            this.state.list.forEach(item => {
+                if(item.order === this.state.clientOrder - 1){
+                    test =  item.id
+                }
+            })
+            this.setState(({clientOrder}) => ({
+                clientOrder: clientOrder - 1,
+                clientId: test
+            }))
+        }
     }
 
     sortClientsList = (filter) => {
         let modList = this.state.list.concat();
+        this.setState({clientOrder: 0})
         switch (filter) {
             case 'id':
                 let temp
@@ -57,17 +88,19 @@ class Table extends Component {
             default:
                 break
         }
+        modList.map((item, i)=> item.order = i + 1)
         this.setState({list: modList})
     }
 
-    selectClient = (id) => {
-        this.setState({clientId: id})
+    selectClient = (id, order) => {
+        this.setState({clientId: id, clientOrder: order})
     }
 
     deletClient = () => {
         let modList = this.state.list.concat();
         const res = modList.filter(item => item.id !== this.state.clientId)
-        this.setState({list: res})
+        res.map((item, i)=> item.order = i + 1)
+        this.setState({list: res, clientOrder: 0})
     }
 
     addNewClient = () => {
@@ -102,9 +135,6 @@ class Table extends Component {
     }
 
     onChangeClient = (value) => {
-        let modList = [...this.state.list]
-        let index
-        index = modList.findIndex(n => n.id === this.state.clientId)
         switch (this.state.modalProperty) {
             case 'name':
                 this.setState(({list}) => ({
@@ -126,23 +156,66 @@ class Table extends Component {
         }
     }
 
+    dragStartHandler = (e, item) => {
+        this.setState({
+            currentClient: item,
+            clientOrder: item.order
+        })
+    }
+
+    dragEndHandler = (e) => {
+    
+    }
+
+    dragOverHandler = (e) => {
+        e.preventDefault()
+    }
+
+    dropHandler = (e, item) => {
+        e.preventDefault()
+        this.setState(({list}) => ({
+            list: list.map(i => {
+                if(i.id === item.id) {
+                    return {...i, order: this.state.currentClient.order}
+                }
+                if(i.id === this.state.currentClient.id) {
+                    return {...i, order: item.order}
+                }
+                return i
+            })
+        }))
+        this.setState(({list}) => ({
+            list: list.sort(this.sortList),
+            clientOrder: item.order
+        }))
+    }
+
+    sortList = (a, b) => a.order > b.order ? 1 : -1
+    
+
     render() {
-        const {formActive, modalActive, list, clientId} = this.state
+        const {formActive, modalActive, list, clientId, clientOrder} = this.state
         return (
             <TableView 
-            onChangeClientList={this.onChangeClientList}
-            onFormChange={this.onFormChange} 
-            formActive={formActive} 
-            onChangeClient={this.onChangeClient} 
-            onModalChange={this.onModalChange} 
-            modalActive={modalActive} 
-            addNewClient={this.addNewClient} 
-            deletClient={this.deletClient}
-            openModal={this.openModal}
-            sortClientsList={this.sortClientsList}
-            list={list}
-            clientId={clientId}
-            selectClient={this.selectClient}/>
+                onChangeClientList={this.onChangeClientList}
+                onFormChange={this.onFormChange} 
+                formActive={formActive} 
+                onChangeClient={this.onChangeClient} 
+                onModalChange={this.onModalChange} 
+                modalActive={modalActive} 
+                addNewClient={this.addNewClient} 
+                deletClient={this.deletClient}
+                openModal={this.openModal}
+                sortClientsList={this.sortClientsList}
+                list={list}
+                clientId={clientId}
+                selectClient={this.selectClient}
+                dragStartHandler={this.dragStartHandler}
+                dragEndHandler={this.dragEndHandler}
+                dragOverHandler={this.dragOverHandler}
+                dropHandler={this.dropHandler}
+                clientOrder={clientOrder}
+                />
         )
     }
 }

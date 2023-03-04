@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 
 class IntroView extends Component {
     render() {
-        const {nav, fixedHeader, isActive, handleToggle} = this.props
+        const {nav, fixedHeader, isActive, handleToggle, imgLoadingError, imgLoaded} = this.props
         return (
             <div className="intro">
                 <div className={`header ${fixedHeader ? "fixed" : ''}`}>
                     <div className="header_inner">
                         <div className="header_logo">
-                            <img className="header_logo_img" src={logo} alt="Logo"></img>
+                            <img onError={imgLoadingError} onLoad={imgLoaded} className="header_logo_img" src={logo} alt="Logo"></img>
                             <div className="header_logo_title">tajam</div>
 
                         </div>

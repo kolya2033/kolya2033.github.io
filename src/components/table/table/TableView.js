@@ -4,7 +4,7 @@ import Modal from '../modal/Modal'
 
 class TableView extends Component {
     render() {
-        const {onChangeClientList, onFormChange, formActive, onChangeClient, onModalChange, modalActive, addNewClient, deletClient, openModal, sortClientsList, clientId, list, selectClient} = this.props
+        const {onChangeClientList, onFormChange, formActive, onChangeClient, onModalChange, modalActive, addNewClient, deletClient, openModal, sortClientsList, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientOrder} = this.props
         return (
             <div className='table'>
                 <Form 
@@ -35,10 +35,18 @@ class TableView extends Component {
                         <td className="table_base" onClick={() => sortClientsList('username')}>username</td>
                         <td className="table_base" onClick={() => sortClientsList('company')}>company</td>
                     </tr>
-                    {console.log(list)}
                     {
                         list.map((item, i) => (
-                            <tr className={`cleint ${item.id === clientId ? "action" : ''}`} key={i} onClick={() => selectClient(item.id)}>
+                            <tr 
+                                onDragStart={(e) => dragStartHandler(e, item)}
+                                onDragLeave={(e) => dragEndHandler(e)}
+                                onDragEnd={(e) => dragEndHandler(e)}
+                                onDragOver={(e) => dragOverHandler(e)}
+                                onDrop={(e) => dropHandler(e, item)}
+                                draggable={true} 
+                                className={`cleint ${item.order === clientOrder ? "action" : ''}`} 
+                                key={i} 
+                                onClick={() => selectClient(item.id, item.order)}>
                                 <td className="cleint_item">{item.id}</td>
                                 <td className="cleint_item">{item.name}</td>
                                 <td className="cleint_item">{item.username}</td>
