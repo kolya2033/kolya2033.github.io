@@ -14,12 +14,12 @@ class Works extends Component {
                     <div className="work_item">
                         <div className="work_item_title">Our works</div>
                         <div className="work_item_imgs">
-                            <img src={work1} alt="Woks" className="work_item_img"></img>
-                            <img src={work2} alt="Woks" className="work_item_img"></img>
-                            <img src={work3} alt="Woks" className="work_item_img"></img>
-                            <img src={work4} alt="Woks" className="work_item_img"></img>
-                            <img src={work5} alt="Woks" className="work_item_img"></img>
-                            <img src={work6} alt="Woks" className="work_item_img"></img>
+                            <img src={work1} alt="Works" className="work_item_img"></img>
+                            <img src={work2} alt="Works" className="work_item_img"></img>
+                            <img src={work3} alt="Works" className="work_item_img"></img>
+                            <img src={work4} alt="Works" className="work_item_img"></img>
+                            <img src={work5} alt="Works" className="work_item_img"></img>
+                            <img src={work6} alt="Works" className="work_item_img"></img>
                         </div>
                     </div>
                     <div className="work_item">

@@ -4,6 +4,7 @@ import testimonials2 from '../../../assets/img/TestimonialsImg/2.png'
 import testimonials3 from '../../../assets/img/TestimonialsImg/3.png'
 import testimonials4 from '../../../assets/img/TestimonialsImg/4.png'
 import testimonials5 from '../../../assets/img/TestimonialsImg/5.png'
+import TestimonialsImg from './TestimonialsImg'
 
 class Testimonials extends Component {
     render() {
@@ -17,22 +18,11 @@ class Testimonials extends Component {
                     <div className="testimonials_img">
                         <a href="#" className="testimonials_img_btn testimonials_img_btn--prev"></a>
                         <a href="#" className="testimonials_img_btn testimonials_img_btn--next"></a>
-                        <div className="testimonials_img_item">
-                            <img src={testimonials1} alt="TestimonialsImg" className="testimonials_img_item_img"></img>
-                        </div>
-                        <div className="testimonials_img_item">
-                            <img src={testimonials2} alt="TestimonialsImg" className="testimonials_img_item_img"></img>
-                        </div>
-                        <div className="testimonials_img_item">
-                            <img src={testimonials3} alt="TestimonialsImg" className="testimonials_img_item_img active"></img>
-                        </div>
-                        <div className="testimonials_img_item">
-                            <img src={testimonials4} alt="TestimonialsImg" className="testimonials_img_item_img"></img>
-                        </div>
-                        <div className="testimonials_img_item">
-                            <img src={testimonials5} alt="TestimonialsImg" className="testimonials_img_item_img"></img>
-                        </div>
-
+                        <TestimonialsImg testimonials={testimonials1}/>
+                        <TestimonialsImg testimonials={testimonials2}/>
+                        <TestimonialsImg testimonials={testimonials3} active={'active'}/>
+                        <TestimonialsImg testimonials={testimonials4}/>
+                        <TestimonialsImg testimonials={testimonials5}/>
                     </div>
                 </div>
             </div>

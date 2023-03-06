@@ -35,7 +35,7 @@ class Table extends Component {
     }
 
     onkeyDown = (e) => {
-        if ((e.key === 'ArrowDown') && this.state.clientOrder < 10) {
+        if ((e.key === 'ArrowDown') && this.state.clientOrder < this.state.list.length) {
             let test 
             this.state.list.forEach(item => {
                 if(item.order === this.state.clientOrder + 1){
@@ -120,8 +120,10 @@ class Table extends Component {
     }
 
     onChangeClientList = (client) => {
-        let modlist = this.state.list.concat();
-        let modClient = {...client, id: modlist.pop().id + 1}
+        let modList = this.state.list.concat();
+        let count = 0
+        modList.forEach(item => item.id > count? count = item.id: count)
+        let modClient = {...client, id: count + 1, order: modList.length + 1}
         this.setState(({list}) => ({
             list: [...list, modClient]
         }))

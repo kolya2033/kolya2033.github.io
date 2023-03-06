@@ -7,9 +7,10 @@ class Form extends Component {
         super(props)
         this.state = {
             client: {
-                id: '',
+                id: null,
                 name: '',
                 username: '',
+                order: 0,
                 company: {
                     name: ''
                 }
