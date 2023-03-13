@@ -1,71 +1,69 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
+import { addNewClient } from '../../../store/action/clientsAction'
 
-class Form extends Component {
+const  Form = (props) => {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            client: {
-                id: null,
-                name: '',
-                username: '',
-                order: 0,
-                company: {
-                    name: ''
-                }
-            }
-        }
-    }
+    const dispatch = useDispatch()
+    const {list} = useSelector(store => store)
+    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
+    const [companyName, setCompanyName] = useState('')
     
-    componentDidMount() {
-        window.addEventListener('keydown', this.onkeyDown)
-    }
+    useEffect(() => {
+        window.addEventListener('keydown', onkeyDown)
+        return function() {
+            window.removeEventListener('keydown', onkeyDown)
+        }
+    })
 
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.onkeyDown)
-    }
-
-    onkeyDown = (e) => {
+    const onkeyDown = (e) => {
         if (e.keyCode === 27) {
             this.props.onFormChange(false)
         }
     } 
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.props.onChangeClientList(this.state.client);
-        this.props.onFormChange(false);
-        this.setState({
-            client: {
-                id: '',
-                name: '',
-                username: '',
-                company: {
-                    name: ''
-                }
+        const modList = [...list]
+        let count = 0
+        modList.forEach(item => item.id > count? count = item.id: count)
+        dispatch(addNewClient([...modList, {
+            id: count + 1,
+            order: modList.length + 1,
+            name: name,
+            username: username,
+            company: {
+                name: companyName
             }
-        })
+        }]));
+        setName('')
+        setUsername('')
+        setCompanyName('')
+        props.onFormChange(false);
     }
 
-    onItemChange = (item, e) => {
-        this.setState(({client}) => ({
-            client: {
-                ...client,
-                ...(item === 'company' 
-                        ? {company: {name: e.target.value}}
-                        : {[item]: e.target.value}) 
-            }
-        }))
+    const onItemChange = (item, e) => {
+        switch (item) {
+            case 'name':
+                setName(e.target.value)
+            break;
+            case 'username':
+                setUsername(e.target.value)
+            break;
+            case 'company':
+                setCompanyName(e.target.value)
+            break;
+            default:
+                break;
+        }
     }
 
-    render() {
-        const {name, username, company} = this.state.client
-        const {onFormChange, formActive} = this.props
-        return (
-            <FormView name={name} username={username} company={company} onFormChange={onFormChange} onSubmit={this.onSubmit} onItemChange={this.onItemChange} formActive={formActive}/>
-        )
-    }
+    const {onFormChange, formActive} = props
+    return (
+        <FormView name={name} username={username} companyName={companyName} onFormChange={onFormChange} onSubmit={onSubmit} onItemChange={onItemChange} formActive={formActive}/>
+    )
 }
 
 export default Form

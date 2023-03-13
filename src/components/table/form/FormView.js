@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class FormView extends Component {
     render() {
-        const {name, username, company, onItemChange } = this.props
+        const {name, username, companyName, onItemChange } = this.props
         return (
             <div  className={this.props.formActive ? "form active" : "form"} onClick={() => this.props.onFormChange(false)}>
                 <form 
@@ -30,7 +30,7 @@ class FormView extends Component {
                         className="form_inputt"
                         type="text" 
                         name="company"
-                        value={company.name}
+                        value={companyName}
                         onChange={(e) => onItemChange('company' ,e)}/>
                     
                     <button 

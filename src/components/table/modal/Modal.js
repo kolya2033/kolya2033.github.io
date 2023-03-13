@@ -1,57 +1,60 @@
-import React, { Component } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ModalView from './ModalView'
+import { changeClient } from '../../../store/action/clientsAction'
 
-class Modal extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            value: ''
+const Modal = (props) => {
+
+    const dispatch = useDispatch() 
+    const [value, setValue] = useState('')
+
+    const {list, modalProperty, clientId} = useSelector(store => store)
+
+    useEffect(() => {
+        window.addEventListener('keydown', onkeyDown)
+        return function() {
+            window.removeEventListener('keydown', onkeyDown)
         }
-    }
+    })
 
-        
-    componentDidMount() {
-        window.addEventListener('keydown', this.onkeyDown)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.onkeyDown)
-    }
-
-    onkeyDown = (e) => {
+    const onkeyDown = (e) => {
         if (e.keyCode === 27) {
-            this.props.onModalChange(false)
+            props.onModalChange(false)
         }
     }
 
-    onItemChange = (e) => {
-        this.setState({
-            value: e.target.value,
-        })
+    const onItemChange = (e) => {
+        setValue(e.target.value)
     }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.props.onChangeClient(this.state.value);
-        this.props.onModalChange(false);
-        this.setState({
-            value: ''
-        })
+        let modList = [...list]
+        switch (modalProperty) {
+            case 'name':
+            case 'username':
+                modList = modList.map(item => item.id === clientId ? {...item, [modalProperty]: value} : item)
+                break;
+            case 'company':
+                modList = modList.map(item => item.id === clientId ? {...item, company:{...item.company, name: value}} : item)
+            default:
+                break;
+        }
+        dispatch(changeClient(modList));
+        props.onModalChange(false);
+        setValue('')
     }
 
+    const {modalActive, onModalChange} = props
+    return (
+        <ModalView 
+            modalActive={modalActive} 
+            onModalChange={onModalChange} 
+            onSubmit={onSubmit} 
+            onItemChange={onItemChange} 
+            value={value}/>
+    )
 
-    render() {
-        const {value} = this.state
-        const {modalActive, onModalChange} = this.props
-        return (
-            <ModalView 
-                modalActive={modalActive} 
-                onModalChange={onModalChange} 
-                onSubmit={this.onSubmit} 
-                onItemChange={this.onItemChange} 
-                value={value}/>
-        )
-    }
 }
 
 export default Modal
