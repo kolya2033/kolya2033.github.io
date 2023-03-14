@@ -33,11 +33,11 @@ const Table = () => {
 
     const onkeyDown = (e) => {
         if ((e.key === 'ArrowDown') && clientOrder < list.length) {
-            let id = list.find(item => item.order === clientOrder + 1)
-            dispatch(selectClient(id, clientOrder + 1))
+            let client = list.find(item => item.order === clientOrder + 1)
+            dispatch(selectClient(client.id, clientOrder + 1))
         } if ((e.key === 'ArrowUp') && clientOrder > 1) {
-            let id = list.find(item => item.order === clientOrder - 1)
-            dispatch(selectClient(id, clientOrder - 1))
+            let client = list.find(item => item.order === clientOrder - 1)
+            dispatch(selectClient(client.id, clientOrder - 1))
         }
     }
 
