@@ -21,41 +21,32 @@ export function listLoaded() {
     }
 }
 
-export function listSortId(list) {
-    list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> item.order = i + 1)
-    return {type: LIST_SORT_ID, payload: list}
+export function listSortId() {
+    return {type: LIST_SORT_ID}
 }
 
-export function listSortName(list) {
-    list.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
-        .map((item, i)=> item.order = i + 1)
-    return {type: LIST_SORT_NAME, payload: list}
+export function listSortName() {
+    return {type: LIST_SORT_NAME}
 }
 
-export function listSortUsername(list) {
-    list.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
-        .map((item, i)=> item.order = i + 1)
-    return {type: LIST_SORT_USERNAME, payload: list}
+export function listSortUsername() {
+    return {type: LIST_SORT_USERNAME}
 }
 
-export function listSortCompany(list) {
-    list.sort((a, b) => a.company.name.toLowerCase() > b.company.name.toLowerCase() ? 1 : -1)
-        .map((item, i)=> item.order = i + 1)
-    return {type: LIST_SORT_COMPANY, payload: list}
+export function listSortCompany() {
+    return {type: LIST_SORT_COMPANY}
 }
 
 export function selectClient(clientId, clientOrder) {
     return {type: SELECT_CLIENT, clientId, clientOrder}
 }
 
-export function deletClient(list, clientId) {
-    list = list.filter(item => item.id !== clientId)
-    list.map((item, i) => item.order = i+1)
-    return {type: DELET_CLIENT, payload: list}
+export function deletClient(clientId) {
+    return {type: DELET_CLIENT, payload: clientId}
 }
 
-export function addNewClient(list) {
-    return {type: ADD_NEW_CLIENT, payload: list}
+export function addNewClient(client) {
+    return {type: ADD_NEW_CLIENT, payload: client}
 }
 
 export function onModalProperty(payload) {

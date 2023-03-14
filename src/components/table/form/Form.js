@@ -29,7 +29,7 @@ const  Form = (props) => {
         const modList = [...list]
         let count = 0
         modList.forEach(item => item.id > count? count = item.id: count)
-        dispatch(addNewClient([...modList, {
+        dispatch(addNewClient({
             id: count + 1,
             order: modList.length + 1,
             name: name,
@@ -37,7 +37,7 @@ const  Form = (props) => {
             company: {
                 name: companyName
             }
-        }]));
+        }));
         setName('')
         setUsername('')
         setCompanyName('')

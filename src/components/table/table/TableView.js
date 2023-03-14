@@ -37,7 +37,7 @@ const TableView = (props) => {
                 
             <div className='tableBtn'>
                 <button className='btn' onClick={() => onFormChange(true)}>add new client</button>
-                <button className='btn' onClick={() => dispatch(deletClient(list, clientId))}>delet client</button>
+                <button className='btn' onClick={() => dispatch(deletClient(clientId))}>delet client</button>
             </div>
             <br />
             <div className='tableBtn'>
@@ -48,10 +48,10 @@ const TableView = (props) => {
             
             <table className="table_clients">
                 <tr>
-                    <td className="table_base" onClick={() => dispatch(listSortId(list))}>id</td>
-                    <td className="table_base" onClick={() => dispatch(listSortName(list))}>name</td>
-                    <td className="table_base" onClick={() => dispatch(listSortUsername(list))}>username</td>
-                    <td className="table_base" onClick={() => dispatch(listSortCompany(list))}>company</td>
+                    <td className="table_base" onClick={() => dispatch(listSortId())}>id</td>
+                    <td className="table_base" onClick={() => dispatch(listSortName())}>name</td>
+                    <td className="table_base" onClick={() => dispatch(listSortUsername())}>username</td>
+                    <td className="table_base" onClick={() => dispatch(listSortCompany())}>company</td>
                 </tr>
                 {
                     list.map((item, i) => (

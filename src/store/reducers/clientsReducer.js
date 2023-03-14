@@ -26,19 +26,22 @@ export const clientsReducer = (state = defaultState, action) => {
         case LIST_LOADED:
             return {...state, list: action.payload}
         case LIST_SORT_ID:
-            return {...state, list: action.payload}
+            return {...state, list: state.list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> item.order = i + 1)}
         case LIST_SORT_NAME:
-            return {...state, list: action.payload}
+            return {...state, list: state.list.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+                .map((item, i)=> item.order = i + 1)}
         case LIST_SORT_USERNAME:
-            return {...state, list: action.payload}
+            return {...state, list: state.list.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
+                .map((item, i)=> item.order = i + 1)}
         case LIST_SORT_COMPANY:
-            return {...state, list: action.payload}
+            return {...state, list: state.list.sort((a, b) => a.company.name.toLowerCase() > b.company.name.toLowerCase() ? 1 : -1)
+                .map((item, i)=> item.order = i + 1)}
         case SELECT_CLIENT:
             return {...state, clientId: action.clientId, clientOrder: action.clientOrder}
         case DELET_CLIENT:
-            return {...state, list: action.payload, clientOrder: 0}
+            return {...state, list: state.list.filter(item => item.id !== action.payload).map((item, i) => item.order = i+1), clientOrder: 0}
         case ADD_NEW_CLIENT:
-            return {...state, list: action.payload}
+            return {...state, list: [...state.list, action.payload]}
         case ADD_MODAL_PROPERTY: 
             return {...state, modalProperty: action.payload}
         case CHANGE_CLIENT:

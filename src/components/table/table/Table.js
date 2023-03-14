@@ -33,20 +33,10 @@ const Table = () => {
 
     const onkeyDown = (e) => {
         if ((e.key === 'ArrowDown') && clientOrder < list.length) {
-            let id
-            list.forEach(item => {
-                if(item.order === clientOrder + 1){
-                    id =  item.id
-                }
-            })
+            let id = list.find(item => item.order === clientOrder + 1)
             dispatch(selectClient(id, clientOrder + 1))
         } if ((e.key === 'ArrowUp') && clientOrder > 1) {
-            let id 
-            list.forEach(item => {
-                if(item.order === clientOrder - 1){
-                    id =  item.id
-                }
-            })
+            let id = list.find(item => item.order === clientOrder - 1)
             dispatch(selectClient(id, clientOrder - 1))
         }
     }
@@ -78,8 +68,7 @@ const Table = () => {
 
     const dropHandler = (e, item) => {
         e.preventDefault()
-        let modList = [...list]
-        modList = modList.map(i => {
+        const modList = list.map(i => {
             if(i.id === item.id) {
                 return {...i, order: currentClient.order}
             }
@@ -87,8 +76,7 @@ const Table = () => {
                 return {...i, order: item.order}
             }
             return i
-        })
-        modList.sort((a, b) => a.order > b.order ? 1 : -1)
+        }).sort((a, b) => a.order > b.order ? 1 : -1)
         dispatch(onDropHandler(modList, item))
     }
     
