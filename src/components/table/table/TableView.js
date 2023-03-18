@@ -64,7 +64,7 @@ const TableView = (props) => {
                             draggable={true} 
                             className={`cleint ${item.order === clientOrder ? "action" : ''}`} 
                             key={item.id} 
-                            onClick={() => dispatch(selectClient({clientId: item.id, clientOrder: item.order}))}>
+                            onClick={() => selectClient(item)}>
                             <td className="cleint_item">{item.id}</td>
                             <td className="cleint_item">{item.name}</td>
                             <td className="cleint_item">{item.username}</td>

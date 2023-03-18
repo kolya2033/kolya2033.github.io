@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {deletClient, listLoaded, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
+import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listLoaded, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
 import axios from 'axios'
 
@@ -19,7 +19,7 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
-    const {list, clientId, clientOrder, currentClient} = useSelector(state=> state)
+    const {list, clientId, clientOrder} = useSelector(state=> state)
 
     useEffect(() => {
         dispatch(asyncListLoaded())
@@ -34,10 +34,10 @@ const Table = () => {
     const onkeyDown = (e) => {
         if ((e.key === 'ArrowDown') && clientOrder < list.length) {
             let client = list.find(item => item.order === clientOrder + 1)
-            dispatch(selectClient({clientId: client.id, clientOrder: clientOrder + 1}))
+            dispatch(arrowDownSelectClient(client.id))
         } if ((e.key === 'ArrowUp') && clientOrder > 1) {
             let client = list.find(item => item.order === clientOrder - 1)
-            dispatch(selectClient({clientId: client.id, clientOrder: clientOrder - 1}))
+            dispatch(arrowUpSelectClient(client.id))
         }
     }
 
@@ -68,16 +68,7 @@ const Table = () => {
 
     const dropHandler = (e, item) => {
         e.preventDefault()
-        const modList = list.map(i => {
-            if(i.id === item.id) {
-                return {...i, order: currentClient.order}
-            }
-            if(i.id === currentClient.id) {
-                return {...i, order: item.order}
-            }
-            return i
-        }).sort((a, b) => a.order > b.order ? 1 : -1)
-        dispatch(onDropHandler({list:modList, item:item}))
+        dispatch(onDropHandler(item))
     }
     
 
@@ -96,7 +87,7 @@ const Table = () => {
             listSortCompany={listSortCompany}
             list={list}
             clientId={clientId}
-            selectClient={selectClient}
+            selectClient={(item) => dispatch(selectClient({clientId: item.id, clientOrder: item.order}))}
             dragStartHandler={dragStartHandler}
             dragEndHandler={dragEndHandler}
             dragOverHandler={dragOverHandler}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
-// import { addNewClient } from '../../../store/action/clientsAction'
 import withForm from '../../hoc/withForm'
 import { addNewClient } from '../../../store/reducers/clientsReducerSlice'
 

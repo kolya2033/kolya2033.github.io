@@ -37,6 +37,14 @@ const clientsReducerSlice = createSlice({
             state.clientId = action.payload.clientId
             state.clientOrder = action.payload.clientOrder
         },
+        arrowDownSelectClient(state, action) {
+            state.clientId = action.payload
+            state.clientOrder = state.clientOrder + 1
+        },
+        arrowUpSelectClient(state, action) {
+            state.clientId = action.payload
+            state.clientOrder = state.clientOrder - 1
+        },
         deletClient(state, action) {
             state.list = state.list.filter(item => item.id !== action.payload).map((item, i) => ({...item, order: i+1}))
             state.clientOrder = 0
@@ -48,7 +56,16 @@ const clientsReducerSlice = createSlice({
             state.modalProperty = action.payload
         },
         changeClient(state, action) {
-            state.list = action.payload
+            switch (state.modalProperty) {
+                case 'name':
+                case 'username':
+                    state.list = state.list.map(item => item.id === state.clientId ? {...item, [state.modalProperty]: action.payload} : item)
+                    break;
+                case 'company':
+                    state.list = state.list.map(item => item.id === state.clientId ? {...item, company:{...item.company, name: action.payload}} : item)
+                default:
+                    break;
+            }
         },
         onDragStartHandler(state, action) {
             state.currentClient = action.payload
@@ -56,12 +73,20 @@ const clientsReducerSlice = createSlice({
             state.clientId = action.payload.id
         },
         onDropHandler(state, action) {
-           state.list =  action.payload.list
-           state.clientOrder = action.payload.item.order
+            state.list =  state.list.map(i => {
+                if(i.id === action.payload.id) {
+                    return {...i, order: state.currentClient.order}
+                }
+                if(i.id === state.currentClient.id) {
+                    return {...i, order: action.payload.order}
+                }
+                return i
+            }).sort((a, b) => a.order > b.order ? 1 : -1)
+            state.clientOrder = action.payload.order
         }
     }
 })
 
 
 export default clientsReducerSlice.reducer
-export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded} = clientsReducerSlice.actions
+export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
