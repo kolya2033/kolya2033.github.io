@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
 import { addNewClient } from '../../../store/action/clientsAction'
+import withForm from '../../hoc/withForm'
 
 const  Form = (props) => {
 
@@ -10,19 +11,6 @@ const  Form = (props) => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [companyName, setCompanyName] = useState('')
-    
-    useEffect(() => {
-        window.addEventListener('keydown', onkeyDown)
-        return function() {
-            window.removeEventListener('keydown', onkeyDown)
-        }
-    })
-
-    const onkeyDown = (e) => {
-        if (e.keyCode === 27) {
-            this.props.onFormChange(false)
-        }
-    } 
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -66,4 +54,4 @@ const  Form = (props) => {
     )
 }
 
-export default Form
+export default withForm(Form) 

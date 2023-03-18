@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ModalView from './ModalView'
 import { changeClient } from '../../../store/action/clientsAction'
+import withModal from '../../hoc/withModal'
 
 const Modal = (props) => {
 
@@ -9,19 +10,6 @@ const Modal = (props) => {
     const [value, setValue] = useState('')
 
     const {list, modalProperty, clientId} = useSelector(store => store)
-
-    useEffect(() => {
-        window.addEventListener('keydown', onkeyDown)
-        return function() {
-            window.removeEventListener('keydown', onkeyDown)
-        }
-    })
-
-    const onkeyDown = (e) => {
-        if (e.keyCode === 27) {
-            props.onModalChange(false)
-        }
-    }
 
     const onItemChange = (e) => {
         setValue(e.target.value)
@@ -57,4 +45,4 @@ const Modal = (props) => {
 
 }
 
-export default Modal
+export default withModal(Modal)
