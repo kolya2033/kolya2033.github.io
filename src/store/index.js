@@ -1,6 +1,6 @@
-import {applyMiddleware, createStore} from "redux"
-import thunk from "redux-thunk"
-import { clientsReducer } from "./reducers/clientsReducer"
-import { composeWithDevTools } from "redux-devtools-extension"
+import { configureStore } from "@reduxjs/toolkit"
+import clientsReducerSlice from "./reducers/clientsReducerSlice"
 
-export const store = createStore(clientsReducer, composeWithDevTools(applyMiddleware(thunk)))
+export const store = configureStore({
+    reducer: clientsReducerSlice
+})

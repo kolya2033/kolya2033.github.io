@@ -54,7 +54,7 @@ const TableView = (props) => {
                     <td className="table_base" onClick={() => dispatch(listSortCompany())}>company</td>
                 </tr>
                 {
-                    list.map((item, i) => (
+                    list.map((item) => (
                         <tr 
                             onDragStart={(e) => dragStartHandler(e, item)}
                             onDragLeave={(e) => dragEndHandler(e)}
@@ -63,8 +63,8 @@ const TableView = (props) => {
                             onDrop={(e) => dropHandler(e, item)}
                             draggable={true} 
                             className={`cleint ${item.order === clientOrder ? "action" : ''}`} 
-                            key={i} 
-                            onClick={() => dispatch(selectClient(item.id, item.order))}>
+                            key={item.id} 
+                            onClick={() => dispatch(selectClient({clientId: item.id, clientOrder: item.order}))}>
                             <td className="cleint_item">{item.id}</td>
                             <td className="cleint_item">{item.name}</td>
                             <td className="cleint_item">{item.username}</td>

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ModalView from './ModalView'
-import { changeClient } from '../../../store/action/clientsAction'
 import withModal from '../../hoc/withModal'
+import { changeClient } from '../../../store/reducers/clientsReducerSlice'
 
 const Modal = (props) => {
 

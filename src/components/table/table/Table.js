@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { listLoaded,
-        deletClient,
-        listSortCompany,
-        listSortId,
-        listSortName,
-        listSortUsername,
-        onDragStartHandler,
-        onDropHandler,
-        onModalProperty,
-        selectClient } from '../../../store/action/clientsAction'
+import {deletClient, listLoaded, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
+import axios from 'axios'
+
+const asyncListLoaded = () =>  {
+    return async (dispatch) => {
+        const res = await axios.get("https://jsonplaceholder.typicode.com/users")
+        res.data.map((item, i) => item.order = i + 1)
+        dispatch(listLoaded(res.data))
+    }
+}
 
 const Table = () => {
 
@@ -22,7 +22,7 @@ const Table = () => {
     const {list, clientId, clientOrder, currentClient} = useSelector(state=> state)
 
     useEffect(() => {
-        dispatch(listLoaded())
+        dispatch(asyncListLoaded())
     }, [])
     useEffect(() => {
         window.addEventListener('keydown', onkeyDown)
@@ -34,10 +34,10 @@ const Table = () => {
     const onkeyDown = (e) => {
         if ((e.key === 'ArrowDown') && clientOrder < list.length) {
             let client = list.find(item => item.order === clientOrder + 1)
-            dispatch(selectClient(client.id, clientOrder + 1))
+            dispatch(selectClient({clientId: client.id, clientOrder: clientOrder + 1}))
         } if ((e.key === 'ArrowUp') && clientOrder > 1) {
             let client = list.find(item => item.order === clientOrder - 1)
-            dispatch(selectClient(client.id, clientOrder - 1))
+            dispatch(selectClient({clientId: client.id, clientOrder: clientOrder - 1}))
         }
     }
 
@@ -77,7 +77,7 @@ const Table = () => {
             }
             return i
         }).sort((a, b) => a.order > b.order ? 1 : -1)
-        dispatch(onDropHandler(modList, item))
+        dispatch(onDropHandler({list:modList, item:item}))
     }
     
 
