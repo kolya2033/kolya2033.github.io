@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import ModalView from './ModalView'
-import withModal from '../../hoc/withModal'
 import { changeClient } from '../../../store/reducers/clientsReducerSlice'
 
 const Modal = (props) => {
@@ -24,7 +23,7 @@ const Modal = (props) => {
     return (
         <ModalView 
             modalActive={modalActive} 
-            onModalChange={onModalChange} 
+            onEsc={() => onModalChange(false)} 
             onSubmit={onSubmit} 
             onItemChange={onItemChange} 
             value={value}/>
@@ -32,4 +31,4 @@ const Modal = (props) => {
 
 }
 
-export default withModal(Modal)
+export default Modal

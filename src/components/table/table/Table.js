@@ -7,8 +7,8 @@ import axios from 'axios'
 const asyncListLoaded = () =>  {
     return async (dispatch) => {
         const res = await axios.get("https://jsonplaceholder.typicode.com/users")
-        res.data.map((item, i) => item.order = i + 1)
-        dispatch(listLoaded(res.data))
+        const response = res.data.map((item, i) => ({...item, order: i + 1}))
+        dispatch(listLoaded(response))
     }
 }
 

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import withEsc from '../../hoc/withEsc'
 
 class FormView extends Component {
     render() {
-        const {name, username, companyName, onItemChange } = this.props
+        const {name, username, companyName, onItemChange, onEsc } = this.props
         return (
-            <div  className={this.props.formActive ? "form active" : "form"} onClick={() => this.props.onFormChange(false)}>
+            <div  className={this.props.formActive ? "form active" : "form"} onClick={onEsc}>
                 <form 
                     onClick={e => e.stopPropagation()}
                     className="form_content"
@@ -42,4 +43,4 @@ class FormView extends Component {
     }
 }
 
-export default FormView
+export default withEsc(FormView)

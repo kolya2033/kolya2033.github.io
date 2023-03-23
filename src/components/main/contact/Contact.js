@@ -12,6 +12,8 @@ import billabong from '../../../assets/img/Client/Billabong.svg.png'
 
 class Contact extends Component {
     render() {
+        const firstClientsList = [zara, barneys, calvin, converse, levis]
+        const secondClientsList = [mango, gucci, nike, puma, billabong]
         return (
             <div className="container">
                 <div className="contact">
@@ -30,38 +32,22 @@ class Contact extends Component {
                             <h3 className="clients_title">Our happy client</h3>
                             <div className="clients_items">
                                 <div className="clients_item">
-                                    <div className="clients_item_img">
-                                        <img src={zara} alt="Zara Logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={barneys} alt="Barneys New York Logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={calvin} alt="Calvin klein logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={converse} alt="Converse logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={levis} alt="Levi's logo"></img>
-                                    </div>
+                                    {
+                                        firstClientsList.map(item => (
+                                            <div key={item} className="clients_item_img">
+                                                <img src={item} alt="client"></img>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                                 <div className="clients_item">
-                                    <div className="clients_item_img">
-                                        <img src={mango} alt="Logo of Mango"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={gucci} alt="Gucci Logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={nike} alt="Logo NIKE"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={puma} alt="Puma Logo"></img>
-                                    </div>
-                                    <div className="clients_item_img">
-                                        <img src={billabong} alt="Billabong"></img>
-                                    </div>
+                                    {
+                                        secondClientsList.map(item => (
+                                            <div key={item} className="clients_item_img">
+                                                <img src={item} alt="client"></img>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                         </div>

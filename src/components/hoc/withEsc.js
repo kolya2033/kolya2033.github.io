@@ -1,7 +1,7 @@
 import React from "react"
 
 
-const withForm = (Component) => {
+const withEsc = (Component) => {
     return class extends React.Component {
         
         componentDidMount() {
@@ -12,8 +12,9 @@ const withForm = (Component) => {
         }
 
         onkeyDown = (e) => {
+            const {onEsc} = this.props
             if (e.keyCode === 27) {
-                this.props.onFormChange(false)
+                onEsc()
             }
         } 
 
@@ -23,4 +24,4 @@ const withForm = (Component) => {
     }
 }
 
-export default withForm;
+export default withEsc;

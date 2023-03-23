@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import withEsc from '../../hoc/withEsc'
 
 class ModalView extends Component {
     render() {
-        const {modalActive, onModalChange, onSubmit, onItemChange, value} = this.props
+        const {modalActive, onEsc, onSubmit, onItemChange, value} = this.props
         return (
-            <div  className={modalActive ? "modal active" : "modal"} onClick={() => onModalChange(false)}>
+            <div  className={modalActive ? "modal active" : "modal"} onClick={onEsc}>
                 <form 
                     onClick={e => e.stopPropagation()}
                     className="modal_content"
@@ -24,4 +25,4 @@ class ModalView extends Component {
     }
 }
 
-export default ModalView
+export default withEsc(ModalView)

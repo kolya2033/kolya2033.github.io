@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
-import withForm from '../../hoc/withForm'
 import { addNewClient } from '../../../store/reducers/clientsReducerSlice'
 
 const  Form = (props) => {
@@ -50,8 +49,15 @@ const  Form = (props) => {
 
     const {onFormChange, formActive} = props
     return (
-        <FormView name={name} username={username} companyName={companyName} onFormChange={onFormChange} onSubmit={onSubmit} onItemChange={onItemChange} formActive={formActive}/>
+        <FormView 
+            name={name} 
+            username={username} 
+            companyName={companyName} 
+            onEsc={() => onFormChange(false)} 
+            onSubmit={onSubmit} 
+            onItemChange={onItemChange} 
+            formActive={formActive}/>
     )
 }
 
-export default withForm(Form) 
+export default Form 
