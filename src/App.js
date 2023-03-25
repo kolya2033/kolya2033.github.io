@@ -1,44 +1,45 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Table from './components/table/table/Table';
+import { Provider } from './context/context';
 
-class App extends Component {
+const App = () => {
 
-    state = {
-        isActive: false,
-        fixedHeader: false,
-    };
-
-    componentDidMount() {
-        window.addEventListener("scroll", this.isSticky);
-        return () => {
-        window.removeEventListener("scroll", this.isSticky);
-        };
+    const handleToggle = () => {
+        setData(data => ({...data, isActive: !data.isActive }))
     }
 
-    isSticky = () => {
+    const [data, setData] = useState({
+        isActive: false,
+        fixedHeader: false,
+        handleToggle: handleToggle
+    })
+
+    useEffect(() => {
+        window.addEventListener("scroll", isSticky);
+        return () => {
+        window.removeEventListener("scroll", isSticky);
+        };
+    })
+
+    const isSticky = () => {
         const scrollTop = window.scrollY;
-        this.setState({fixedHeader: scrollTop >= 250 ? true : false})
+        setData(data => ({...data, fixedHeader: scrollTop >= 250 ? true : false}))
     };    
 
-    handleToggle = () => {
-        this.setState(({ isActive }) => ({ isActive: !isActive }));
-    };
-
-    render() {
-        const {fixedHeader, isActive} = this.state
-        return (
+    return (
+        <Provider value={data}>
             <div className="App">
                 <Header/>
-                <Main fixedHeader={fixedHeader} isActive={isActive} handleToggle={this.handleToggle}/>
+                <Main/>
                 <Table/>
                 <Footer/>
             </div>
-        );
-  }
+        </Provider>
+    );
 }
 
 export default App;

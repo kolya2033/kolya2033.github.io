@@ -1,33 +1,29 @@
-import React, { Component } from 'react'
+import { useState } from 'react'
 import IntroView from './IntroView';
+import { Consumer, dataContext } from '../../../context/context';
+import { useContext } from 'react';
 
-class Intro extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            nav: ['Home', 'About', 'Expertise', 'Teams', 'Works', 'People say', 'Contact']
-        }
-    }
+const Intro = () => {
 
-    imgLoaded = () =>  console.log('successful upload')
+    const [nav, setNav] = useState(['Home', 'About', 'Expertise', 'Teams', 'Works', 'People say', 'Contact'])
 
-    imgLoadingError = () => console.log('loading error')
+    const context = useContext(dataContext)
+    
+    const imgLoaded = () =>  console.log('successful upload')
 
-    render() {
-        const {fixedHeader, isActive, handleToggle} = this.props
-        const {nav} = this.state
+    const imgLoadingError = () => console.log('loading error')
 
-        return (
-            <IntroView 
-                fixedHeader={fixedHeader} 
-                isActive={isActive} 
-                handleToggle={handleToggle} 
-                nav={nav}
-                imgLoaded={this.imgLoaded}
-                imgLoadingError={this.imgLoadingError}
-                />
-        )
-    }
+    return (
+        
+        <IntroView 
+            fixedHeader={context.fixedHeader} 
+            isActive={context.isActive} 
+            handleToggle={context.handleToggle} 
+            nav={nav}
+            imgLoaded={imgLoaded}
+            imgLoadingError={imgLoadingError}
+            />
+    )
 }
 
 export default  Intro
