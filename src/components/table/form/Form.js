@@ -6,7 +6,7 @@ import { addNewClient } from '../../../store/reducers/clientsReducerSlice'
 const  Form = (props) => {
 
     const dispatch = useDispatch()
-    const {list} = useSelector(store => store)
+    const list = useSelector(store => store.list)
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [companyName, setCompanyName] = useState('')

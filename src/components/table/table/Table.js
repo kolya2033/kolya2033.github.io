@@ -19,7 +19,10 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
-    const {list, clientId, clientOrder} = useSelector(state=> state)
+    const list = useSelector(state=> state.list)
+    const clientId = useSelector(state=> state.clientId)
+    const clientOrder = useSelector(state=> state.clientOrder)
+
 
     useEffect(() => {
         dispatch(asyncListLoaded())

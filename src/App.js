@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
@@ -9,14 +9,20 @@ import { Provider } from './context/context';
 const App = () => {
 
     const handleToggle = () => {
-        setData(data => ({...data, isActive: !data.isActive }))
+        setIsActive(isActive => !isActive )
     }
 
-    const [data, setData] = useState({
-        isActive: false,
-        fixedHeader: false,
-        handleToggle: handleToggle
-    })
+    const [isActive, setIsActive] = useState(false)
+    const [fixedHeader, setFixedHeader] = useState(false)
+
+    const data = useMemo(() => ({isActive, fixedHeader, handleToggle}), 
+    [isActive, fixedHeader, handleToggle])
+
+    // const [data, setData] = useState({
+    //     isActive: false,
+    //     fixedHeader: false,
+    //     handleToggle: handleToggle
+    // })
 
     useEffect(() => {
         window.addEventListener("scroll", isSticky);
@@ -27,7 +33,7 @@ const App = () => {
 
     const isSticky = () => {
         const scrollTop = window.scrollY;
-        setData(data => ({...data, fixedHeader: scrollTop >= 250 ? true : false}))
+        setFixedHeader(scrollTop >= 250 ? true : false)
     };    
 
     return (
