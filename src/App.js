@@ -18,12 +18,6 @@ const App = () => {
     const data = useMemo(() => ({isActive, fixedHeader, handleToggle}), 
     [isActive, fixedHeader, handleToggle])
 
-    // const [data, setData] = useState({
-    //     isActive: false,
-    //     fixedHeader: false,
-    //     handleToggle: handleToggle
-    // })
-
     useEffect(() => {
         window.addEventListener("scroll", isSticky);
         return () => {
