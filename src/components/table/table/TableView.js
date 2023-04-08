@@ -2,29 +2,10 @@ import { useDispatch } from 'react-redux'
 import Form from '../form/Form'
 import Modal from '../modal/Modal'
 
-const TableView = (props) => {
+const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletClient, openModal, listSortId, listSortName, listSortUsername,  listSortCompany, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientOrder, clientId}) => {
 
     const dispatch = useDispatch()
     
-    const {
-        onFormChange,
-        formActive,
-        onModalChange,
-        modalActive,
-        deletClient,
-        openModal,
-        listSortId,
-        listSortName,
-        listSortUsername,
-        listSortCompany,
-        list,
-        selectClient,
-        dragStartHandler,
-        dragEndHandler,
-        dragOverHandler,
-        dropHandler,
-        clientOrder,
-        clientId} = props
     return (
         <div className='table'>
             <Form 

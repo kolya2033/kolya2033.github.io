@@ -9,7 +9,7 @@ import { Provider } from './context/context';
 const App = () => {
 
     const handleToggle = () => {
-        setIsActive(isActive => !isActive )
+        setIsActive(prevIsActive => !prevIsActive )
     }
 
     const [isActive, setIsActive] = useState(false)

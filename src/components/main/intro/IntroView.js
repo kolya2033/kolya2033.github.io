@@ -1,9 +1,6 @@
 import logo from '../../../assets/img/logo.png';
 
-import React, { Component } from 'react'
-
-const IntroView = (props) => {
-    const {nav, fixedHeader, isActive, handleToggle, imgLoadingError, imgLoaded} = props
+const IntroView = ({nav, fixedHeader, isActive, handleToggle, imgLoadingError, imgLoaded}) => {
     return (
         <div className="intro">
             <div className={`header ${fixedHeader ? "fixed" : ''}`}>

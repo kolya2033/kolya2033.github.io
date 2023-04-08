@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import IntroView from './IntroView';
-import { Consumer, dataContext } from '../../../context/context';
+import { dataContext } from '../../../context/context';
 import { useContext } from 'react';
 
 const Intro = () => {
