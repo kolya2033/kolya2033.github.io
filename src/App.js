@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import './App.css';
 import Footer from './components/footer/Footer';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Table from './components/table/table/Table';
 import { Provider } from './context/context';
+import i18n from './i18n';
 
 const App = () => {
 
@@ -32,12 +33,14 @@ const App = () => {
 
     return (
         <Provider value={data}>
+            <Suspense fallback={i18n}>
             <div className="App">
                 <Header/>
                 <Main/>
                 <Table/>
                 <Footer/>
             </div>
+            </Suspense>
         </Provider>
     );
 }

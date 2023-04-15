@@ -85,6 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .intro_title {
+  text-transform: uppercase;
   font-family: 'Playfair Display', serif;
   font-size: 32px;
   color: #fff;
@@ -175,6 +176,27 @@ h1, h2, h3, h4, h5, h6 {
 .nav {
   font-size: 13px;
   text-transform: uppercase;
+}
+
+
+.language {
+  margin-right: 18px;
+  padding: 1px 6px;
+  border: 1px solid #00e0d0;
+  transition: .3s;
+
+  font-size: 16px;
+  font-weight: 700;
+  color: #00e0d0;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+
+.language:hover {
+  color: #00968c;
+  border-color: #00968c;
 }
 
 
@@ -1111,6 +1133,47 @@ textarea.contact_form_textarea::placeholder {
 }
 
 
+@media (max-width: 910px) {
+
+  .nav {
+    width: 100%;
+    margin: 0;
+    padding: 5px 0;
+
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background: #382c5c;
+}
+
+
+  .nav.active {
+      display: block;
+  }
+
+
+  .nav_link {
+      display: block;
+
+      margin: 0;
+      padding: 8px 20px;
+  }
+
+
+  .nav_link:last-child {
+      padding: 8px 20px;
+  }
+
+
+  .nav_toggle {
+      display: block;
+  }
+
+}
+ 
+
 @media (max-width: 800px) {
   
   .works {
@@ -1163,43 +1226,6 @@ textarea.contact_form_textarea::placeholder {
 
 
 @media (max-width: 770px) {
-  
-  .nav {
-      width: 100%;
-      margin: 0;
-      padding: 5px 0;
-
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-
-      background: #382c5c;
-  }
-
-
-  .nav.active {
-      display: block;
-  }
-
-  
-  .nav_link {
-      display: block;
-
-      margin: 0;
-      padding: 8px 20px;
-  }
-
-
-  .nav_link:last-child {
-      padding: 8px 20px;
-  }
-
-  
-  .nav_toggle {
-      display: block;
-  }
-
 
   .contact {
       display: flex;

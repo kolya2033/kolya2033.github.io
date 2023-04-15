@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import { useTranslation } from 'react-i18next'
 import withEsc from '../../hoc/withEsc'
 
 const ModalView = ({modalActive, onEsc, onSubmit, onItemChange, value}) =>  {
+    const {t} = useTranslation()
     return (
         <div  className={modalActive ? "modal active" : "modal"} onClick={onEsc}>
             <form 
@@ -16,7 +17,7 @@ const ModalView = ({modalActive, onEsc, onSubmit, onItemChange, value}) =>  {
                     onChange={(e) => onItemChange(e)}/>
                 <button 
                     type="submit"
-                    className="btn">Change</button>
+                    className="btn">{t("modal.btn")}</button>
             </form>
         </div> 
     )

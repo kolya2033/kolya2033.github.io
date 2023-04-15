@@ -5,7 +5,7 @@ import { useContext } from 'react';
 
 const Intro = () => {
 
-    const [nav, setNav] = useState(['Home', 'About', 'Expertise', 'Teams', 'Works', 'People say', 'Contact'])
+    const [nav, setNav] = useState(['Home', 'About', 'Expertise', 'Teams', 'Works', 'People', 'Contact'])
 
     const context = useContext(dataContext)
     

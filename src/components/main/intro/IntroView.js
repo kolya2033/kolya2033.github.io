@@ -1,6 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import logo from '../../../assets/img/logo.png';
 
 const IntroView = ({nav, fixedHeader, isActive, handleToggle, imgLoadingError, imgLoaded}) => {
+    const {t, i18n} = useTranslation();
     return (
         <div className="intro">
             <div className={`header ${fixedHeader ? "fixed" : ''}`}>
@@ -12,8 +14,11 @@ const IntroView = ({nav, fixedHeader, isActive, handleToggle, imgLoadingError, i
                     </div>
 
                     <div className={`nav ${isActive ? "active" : null}`}>
+                        <button className='language' onClick={() => i18n.changeLanguage("ua")}>ua</button>
+                        <button className='language' onClick={() => i18n.changeLanguage("en")}>en</button>
+
                         {nav.map((item, i) => (
-                            <a key={i} href="#" className="nav_link">{item}</a>
+                            <a key={i} href="#" className="nav_link">{t(`intro.${item}`)}</a>
                         ))}
                     </div>
 
@@ -24,9 +29,9 @@ const IntroView = ({nav, fixedHeader, isActive, handleToggle, imgLoadingError, i
             </div>
             <div className="container">
                 <div className="intro_inner">
-                    <h1 className="intro_title">We Are Awesome Creative Agency</h1> 
-                    <p className="intro_text">This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.</p>
-                    <a href="#" className="btn">learn more</a>
+                    <h1 className="intro_title">{t("intro.title")}</h1> 
+                    <p className="intro_text">{t("intro.text")}</p>
+                    <a href="#" className="btn">{t("intro.btn")}</a>
                 </div>
             </div>
         </div>

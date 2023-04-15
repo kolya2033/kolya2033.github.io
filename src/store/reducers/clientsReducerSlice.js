@@ -63,6 +63,7 @@ const clientsReducerSlice = createSlice({
                     break;
                 case 'company':
                     state.list = state.list.map(item => item.id === state.clientId ? {...item, company:{...item.company, name: action.payload}} : item)
+                    break;
                 default:
                     break;
             }

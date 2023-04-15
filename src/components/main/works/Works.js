@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import work1 from '../../../assets/img/works/1.png'
 import work2 from '../../../assets/img/works/2.png'
 import work3 from '../../../assets/img/works/3.png'
@@ -6,12 +7,13 @@ import work5 from '../../../assets/img/works/5.png'
 import work6 from '../../../assets/img/works/6.png'
 
 const Works = () => {
+    const {t} = useTranslation()
     const worksImg = [work1, work2, work3, work4, work5, work6]
     return (
         <div className="works">
             <div className="works_items">
                 <div className="work_item">
-                    <div className="work_item_title">Our works</div>
+                    <div className="work_item_title">{t("works.title")}</div>
                     <div className="work_item_imgs">
                         {
                             worksImg.map(item => (
@@ -21,7 +23,7 @@ const Works = () => {
                     </div>
                 </div>
                 <div className="work_item">
-                    <div className="work_item_title">See All Project in dribbble </div>
+                    <div className="work_item_title">{t("works.title2")}</div>
                     <div className="work_item_imgs">
                         {
                             worksImg.map(item => (
@@ -31,7 +33,7 @@ const Works = () => {
                     </div>
                 </div>
             </div>
-            <a href="#" className="btn">load more</a>
+            <a hr ef="#" className="btn">{t("works.btn")}</a>
         </div>
     )
     

@@ -4,52 +4,54 @@ import mobile from '../../../assets/img/expertise/MobileApp.png';
 import search from '../../../assets/img/expertise/SearchEngineOptimization.png';
 import game from '../../../assets/img/expertise/GameDevelopment.png';
 import love from '../../../assets/img/expertise/MadeWithLove.png';
+import { useTranslation } from 'react-i18next';
 
 const Expertise = () => {
+    const {t} = useTranslation()
     const expertiseItems = [
         {
             img: web,
-            title: "Web design & development",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.web"),
+            text: t("expertise.cardTitle")
         },
         {
             img: branding,
-            title: "Branding identity",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.branding"),
+            text: t("expertise.cardTitle")
         },
         {
             img: mobile,
-            title: "Mobile app",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.mobile"),
+            text: t("expertise.cardTitle")
         },
         {
             img: search,
-            title: "Search engine optimization",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.search"),
+            text: t("expertise.cardTitle")
         },
         {
             img: game,
-            title: "Game development",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.game"),
+            text: t("expertise.cardTitle")
         },
         {
             img: love,
-            title: "Made with love",
-            text: "This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet Aenean."
+            title: t("expertise.love"),
+            text: t("expertise.cardTitle")
         }
     ]
 
     return (
         <div className="expertise">
             <div className="container">
-                <h3 className="expertise_title">Expertise</h3>
-                <div className="expertise_text">Lorem ipsum dolor sit amet proin gravida nibh vel velit</div>
+                <h3 className="expertise_title">{t("expertise.title")}</h3>
+                <div className="expertise_text">{t("expertise.text")}</div>
                 <div className="expertise_board">
                     {
                         expertiseItems.map(item => (
                             <div key={item.title} className="expertise_board_item expertise_board_item--border-right-bottom">
                                 <div className="expertise_board_item_img">
-                                    <img src={item.img} alt="Web design & development"></img>
+                                    <img src={item.img} alt={`${item.title}`}></img>
                                 </div>
                                 <h4 className="expertise_board_item_title">{item.title}</h4>
                                 <div className="expertise_board_item_text">{item.text}</div>

@@ -1,13 +1,15 @@
+import { useTranslation } from 'react-i18next'
 import withEsc from '../../hoc/withEsc'
 
 const FormView = ({name, username, companyName, onItemChange, onEsc, formActive, onSubmit}) => {
+    const {t} = useTranslation()
     return (
         <div  className={formActive ? "form active" : "form"} onClick={onEsc}>
             <form 
                 onClick={e => e.stopPropagation()}
                 className="form_content"
                 onSubmit={onSubmit}>
-                <h3 className='form_title' >name</h3>
+                <h3 className='form_title' >{t("form.name")}</h3>
                 <input 
                     className="form_inputt"
                     type="text" 
@@ -15,7 +17,7 @@ const FormView = ({name, username, companyName, onItemChange, onEsc, formActive,
                     value={name}
                     onChange={(e) => onItemChange('name' ,e)}/>
 
-                <h3 className='form_title' >username</h3>
+                <h3 className='form_title' >{t("form.username")}</h3>
                 <input 
                     className="form_inputt"
                     type="text" 
@@ -23,7 +25,7 @@ const FormView = ({name, username, companyName, onItemChange, onEsc, formActive,
                     value={username}
                     onChange={(e) => onItemChange('username' ,e)}/>
 
-                <h3 className='form_title'>company</h3>
+                <h3 className='form_title'>{t("form.company")}</h3>
                 <input 
                     className="form_inputt"
                     type="text" 
@@ -33,7 +35,7 @@ const FormView = ({name, username, companyName, onItemChange, onEsc, formActive,
                 
                 <button 
                     type="submit"
-                    className="btn">Subscribe</button>
+                    className="btn">{t("form.btn")}</button>
             </form>
         </div>
     )
