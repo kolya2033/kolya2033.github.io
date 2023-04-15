@@ -34,12 +34,12 @@ const App = () => {
     return (
         <Provider value={data}>
             <Suspense fallback={i18n}>
-            <div className="App">
-                <Header/>
-                <Main/>
-                <Table/>
-                <Footer/>
-            </div>
+                <div className="App">
+                    <Header/>
+                    <Main/>
+                    <Table/>
+                    <Footer/>
+                </div>
             </Suspense>
         </Provider>
     );
