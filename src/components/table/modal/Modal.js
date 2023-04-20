@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import ModalView from './ModalView'
 import { changeClient } from '../../../store/reducers/clientsReducerSlice'
 
-const Modal = (props) => {
+const Modal = ({modalActive, onModalChange}) => {
 
     const dispatch = useDispatch() 
     const [value, setValue] = useState('')
@@ -15,11 +15,10 @@ const Modal = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(changeClient(value));
-        props.onModalChange(false);
+        onModalChange(false);
         setValue('')
     }
 
-    const {modalActive, onModalChange} = props
     return (
         <ModalView 
             modalActive={modalActive} 

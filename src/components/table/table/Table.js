@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listLoaded, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
+import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
-import axios from 'axios'
-
-const asyncListLoaded = () =>  {
-    return async (dispatch) => {
-        const res = await axios.get("https://jsonplaceholder.typicode.com/users")
-        const response = res.data.map((item, i) => ({...item, order: i + 1}))
-        dispatch(listLoaded(response))
-    }
-}
+import asyncListLoaded from '../../../async/apiTable'
 
 const Table = () => {
 
