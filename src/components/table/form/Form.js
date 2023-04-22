@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
 import { addNewClient } from '../../../store/reducers/clientsReducerSlice'
+import { useList } from '../../../store/reducers/selectors'
 
 const  Form = (props) => {
 
     const dispatch = useDispatch()
-    const list = useSelector(store => store.list)
+    const list = useSelector(useList)
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [companyName, setCompanyName] = useState('')

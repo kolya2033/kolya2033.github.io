@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
 import asyncListLoaded from '../../../async/apiTable'
+import {useClientId, useClientOrder, useList } from '../../../store/reducers/selectors'
 
 const Table = () => {
 
@@ -11,9 +12,9 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
-    const list = useSelector(state=> state.list)
-    const clientId = useSelector(state=> state.clientId)
-    const clientOrder = useSelector(state=> state.clientOrder)
+    const list = useSelector(useList)
+    const clientId = useSelector(useClientId)
+    const clientOrder = useSelector(useClientOrder)
 
 
     useEffect(() => {
