@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
 
-export const useList = (state => state.list)
-export const useClientId = (state=> state.clientId)
-export const useClientOrder = (state=> state.clientOrder)
+export const takeList = (state => state.list)
+export const takeClientId = (state=> state.clientId)
+export const takeClientOrder = (state=> state.clientOrder)
