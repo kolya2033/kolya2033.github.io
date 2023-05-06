@@ -72,5 +72,9 @@ export default {
     },
     modal: {
         btn: "Change"
+    },
+    loading: {
+        loading: "loading...",
+        error: "An error has occurred"
     }
 }

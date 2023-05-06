@@ -4,6 +4,7 @@ import {arrowDownSelectClient, arrowUpSelectClient, deletClient,addSortValue, li
 import TableView from './TableView'
 import {takeClientId, takeClientOrder, takeSortList } from '../../../store/reducers/selectors'
 import asyncListLoaded from '../../../store/async/apiTable'
+import { useTranslation } from 'react-i18next'
 
 const Table = () => {
 
@@ -15,7 +16,10 @@ const Table = () => {
     const list = useSelector(takeSortList)
     const clientId = useSelector(takeClientId)
     const clientOrder = useSelector(takeClientOrder)
+    const error = useSelector(state => state.error)
+    const loading = useSelector(state => state.loading)
 
+    const {t} = useTranslation()
 
     useEffect(() => {
         dispatch(asyncListLoaded())
@@ -66,7 +70,18 @@ const Table = () => {
         e.preventDefault()
         dispatch(onDropHandler(item))
     }
-    
+
+    if (loading) {
+        return (
+            <div className='loading'>{t("loading.loading")}</div>
+        )
+    }
+
+    if (error) {
+        return (
+            <div className='loading error'>{t("loading.error")}</div>
+        )
+    }
 
     return (
         
@@ -78,10 +93,10 @@ const Table = () => {
             deletClient={deletClient}
             openModal={openModal}
             addSortValue={addSortValue}
-            listSortId={listSortId}
-            listSortName={listSortName}
-            listSortUsername={listSortUsername}
-            listSortCompany={listSortCompany}
+            // listSortId={listSortId}
+            // listSortName={listSortName}
+            // listSortUsername={listSortUsername}
+            // listSortCompany={listSortCompany}
             list={list}
             clientId={clientId}
             selectClient={(item) => dispatch(selectClient({clientId: item.id, clientOrder: item.order}))}

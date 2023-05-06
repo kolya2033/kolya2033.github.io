@@ -79,5 +79,9 @@ export default {
     },
     modal: {
         btn: "Змінити"
+    },
+    loading: {
+        loading: "іде завантаження",
+        error: "Виникла помилка"
     }
 }

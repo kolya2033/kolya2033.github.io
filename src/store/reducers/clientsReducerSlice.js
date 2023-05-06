@@ -15,16 +15,16 @@ const clientsReducerSlice = createSlice({
         error: false
     },
     reducers: {
-        listLoaded(state, action) {
-            state.list = action.payload
-        },
+        // listLoaded(state, action) {
+        //     state.list = action.payload
+        // },
         addSortValue(state, action) {
             state.sortValue = action.payload
         },
-        testTest(state, action) {
+        updateList(state, action) {
             state.list = action.payload
             state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
-            
+            state.sortValue = ''
         },
         // listSortId(state) {
         //     state.list = state.list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> ({...item, order: i+1}))
@@ -81,7 +81,6 @@ const clientsReducerSlice = createSlice({
             }
         },
         onDragStartHandler(state, action) {
-            state.sortValue = ''
             state.currentClient = action.payload
             state.clientOrder = action.payload.order
             state.clientId = action.payload.id
@@ -120,4 +119,4 @@ const clientsReducerSlice = createSlice({
 
 
 export default clientsReducerSlice.reducer
-export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, addSortValue, testTest, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
+export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, addSortValue, updateList, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
