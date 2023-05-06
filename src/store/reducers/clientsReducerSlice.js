@@ -8,31 +8,35 @@ const clientsReducerSlice = createSlice({
         clientId: 0,
         clientOrder: 0,
         modalProperty: '',
+        sortValue: '',
         currentClient: null
     },
     reducers: {
         listLoaded(state, action) {
             state.list = action.payload
         },
-        listSortId(state) {
-            state.list = state.list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> ({...item, order: i+1}))
-            state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+        addSortValue(state, action) {
+            state.sortValue = action.payload
         },
-        listSortName(state) {
-            state.list = state.list.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
-            .map((item, i) => ({...item, order: i+1}))
-            state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
-        },
-        listSortUsername(state) {
-            state.list = state.list.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
-            .map((item, i) => ({...item, order: i+1}))
-            state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
-        },
-        listSortCompany(state) {
-            state.list = state.list.sort((a, b) => a.company.name.toLowerCase() > b.company.name.toLowerCase() ? 1 : -1)
-            .map((item, i) => ({...item, order: i+1}))
-            state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
-        },
+        // listSortId(state) {
+        //     state.list = state.list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> ({...item, order: i+1}))
+        //     state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+        // },
+        // listSortName(state) {
+        //     state.list = state.list.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+        //     .map((item, i) => ({...item, order: i+1}))
+        //     state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+        // },
+        // listSortUsername(state) {
+        //     state.list = state.list.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
+        //     .map((item, i) => ({...item, order: i+1}))
+        //     state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+        // },
+        // listSortCompany(state) {
+        //     state.list = state.list.sort((a, b) => a.company.name.toLowerCase() > b.company.name.toLowerCase() ? 1 : -1)
+        //     .map((item, i) => ({...item, order: i+1}))
+        //     state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+        // },
         selectClient(state, action) {
             state.clientId = action.payload.clientId
             state.clientOrder = action.payload.clientOrder
@@ -90,4 +94,4 @@ const clientsReducerSlice = createSlice({
 
 
 export default clientsReducerSlice.reducer
-export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
+export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, addSortValue,  listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
