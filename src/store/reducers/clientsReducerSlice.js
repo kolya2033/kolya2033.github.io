@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import asyncListLoaded from "../async/apiTable";
 
 
 const clientsReducerSlice = createSlice({
@@ -9,7 +10,9 @@ const clientsReducerSlice = createSlice({
         clientOrder: 0,
         modalProperty: '',
         sortValue: '',
-        currentClient: null
+        currentClient: null,
+        loading: false,
+        error: false
     },
     reducers: {
         listLoaded(state, action) {
@@ -17,6 +20,11 @@ const clientsReducerSlice = createSlice({
         },
         addSortValue(state, action) {
             state.sortValue = action.payload
+        },
+        testTest(state, action) {
+            state.list = action.payload
+            state.clientOrder = state.clientOrder !== 0 ? state.list.find(item => item.id === state.clientId).order : 0
+            
         },
         // listSortId(state) {
         //     state.list = state.list.sort((a, b) => a.id > b.id ? 1 : -1).map((item, i)=> ({...item, order: i+1}))
@@ -73,6 +81,7 @@ const clientsReducerSlice = createSlice({
             }
         },
         onDragStartHandler(state, action) {
+            state.sortValue = ''
             state.currentClient = action.payload
             state.clientOrder = action.payload.order
             state.clientId = action.payload.id
@@ -89,9 +98,26 @@ const clientsReducerSlice = createSlice({
             }).sort((a, b) => a.order > b.order ? 1 : -1)
             state.clientOrder = action.payload.order
         }
-    }
+    },
+    extraReducers: {
+        
+        [asyncListLoaded.pending]: (state) => {
+            state.loading = true
+            state.error = false
+            state.list = []
+        },
+        [asyncListLoaded.fulfilled]: (state, action) => {
+            state.loading = false
+            state.error = false
+            state.list = action.payload
+        },
+        [asyncListLoaded.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        }
+    },
 })
 
 
 export default clientsReducerSlice.reducer
-export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, addSortValue,  listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions
+export const {addNewClient, changeClient, deletClient, listSortCompany, listSortId, addSortValue, testTest, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient, listLoaded, arrowDownSelectClient, arrowUpSelectClient} = clientsReducerSlice.actions

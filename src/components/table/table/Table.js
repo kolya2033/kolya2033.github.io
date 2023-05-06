@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {arrowDownSelectClient, arrowUpSelectClient, deletClient,addSortValue, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
-import asyncListLoaded from '../../../async/apiTable'
 import {takeClientId, takeClientOrder, takeSortList } from '../../../store/reducers/selectors'
+import asyncListLoaded from '../../../store/async/apiTable'
 
 const Table = () => {
 
