@@ -3,7 +3,7 @@ import Form from '../form/Form'
 import Modal from '../modal/Modal'
 import { useTranslation } from 'react-i18next'
 
-const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletClient, openModal, addSortValue, listSortId, listSortName, listSortUsername,  listSortCompany, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientOrder, clientId}) => {
+const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletClient, openModal, listSortId, listSortName, listSortUsername,  listSortCompany, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientOrder, clientId}) => {
 
     const dispatch = useDispatch()
     const {t} = useTranslation()
@@ -30,10 +30,10 @@ const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletC
             
             <table className="table_clients">
                 <tr>
-                    <td className="table_base" onClick={() => dispatch(addSortValue('id'))}>{t("table.id")}</td>
-                    <td className="table_base" onClick={() => dispatch(addSortValue('name'))}>{t("table.name")}</td>
-                    <td className="table_base" onClick={() => dispatch(addSortValue('username'))}>{t("table.username")}</td>
-                    <td className="table_base" onClick={() => dispatch(addSortValue('company'))}>{t("table.company")}</td>
+                    <td className="table_base" onClick={() => dispatch(listSortId())}>{t("table.id")}</td>
+                    <td className="table_base" onClick={() => dispatch(listSortName())}>{t("table.name")}</td>
+                    <td className="table_base" onClick={() => dispatch(listSortUsername())}>{t("table.username")}</td>
+                    <td className="table_base" onClick={() => dispatch(listSortCompany())}>{t("table.company")}</td>
                 </tr>
                 {
                     list.map((item) => (
@@ -44,7 +44,7 @@ const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletC
                             onDragOver={(e) => dragOverHandler(e)}
                             onDrop={(e) => dropHandler(e, item)}
                             draggable={true} 
-                            className={`cleint ${item.order === clientOrder ? "action" : ''}`} 
+                            className={`cleint ${item.id === clientId ? "action" : ''}`}
                             key={item.id} 
                             onClick={() => selectClient(item)}>
                             <td className="cleint_item">{item.id}</td>

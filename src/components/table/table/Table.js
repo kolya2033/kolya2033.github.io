@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {arrowDownSelectClient, arrowUpSelectClient, deletClient,addSortValue, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
+import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
-import {takeClientId, takeClientOrder, takeSortList } from '../../../store/reducers/selectors'
+import {takeClientId, takeClientOrder, takeList } from '../../../store/reducers/selectors'
 import asyncListLoaded from '../../../store/async/apiTable'
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +13,7 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
-    const list = useSelector(takeSortList)
+    const list = useSelector(takeList)
     const clientId = useSelector(takeClientId)
     const clientOrder = useSelector(takeClientOrder)
     const error = useSelector(state => state.error)
@@ -92,11 +92,10 @@ const Table = () => {
             modalActive={modalActive}
             deletClient={deletClient}
             openModal={openModal}
-            addSortValue={addSortValue}
-            // listSortId={listSortId}
-            // listSortName={listSortName}
-            // listSortUsername={listSortUsername}
-            // listSortCompany={listSortCompany}
+            listSortId={listSortId}
+            listSortName={listSortName}
+            listSortUsername={listSortUsername}
+            listSortCompany={listSortCompany}
             list={list}
             clientId={clientId}
             selectClient={(item) => dispatch(selectClient({clientId: item.id, clientOrder: item.order}))}
