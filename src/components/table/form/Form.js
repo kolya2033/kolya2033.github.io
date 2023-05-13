@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormView from './FormView'
 import { addNewClient } from '../../../store/reducers/clientsReducerSlice'
-import { takeList } from '../../../store/reducers/selectors'
+import { selectlist } from '../../../store/reducers/selectors'
 
 const  Form = (props) => {
 
     const dispatch = useDispatch()
-    const list = useSelector(takeList)
+    const list = useSelector(selectlist)
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [companyName, setCompanyName] = useState('')
@@ -47,6 +47,7 @@ const  Form = (props) => {
                 break;
         }
     }
+
 
     const {onFormChange, formActive} = props
     return (

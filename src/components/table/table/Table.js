@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {arrowDownSelectClient, arrowUpSelectClient, deletClient, listSortCompany, listSortId, listSortName, listSortUsername, onDragStartHandler, onDropHandler, onModalProperty, selectClient} from '../../../store/reducers/clientsReducerSlice'
 import TableView from './TableView'
-import {takeClientId, takeClientOrder, takeList } from '../../../store/reducers/selectors'
-import asyncListLoaded from '../../../store/async/apiTable'
+import {selectClientId, selectClientOrder, selectlist } from '../../../store/reducers/selectors'
 import { useTranslation } from 'react-i18next'
 import { clientsApi } from '../../../services/clientsquery'
 
@@ -14,10 +13,10 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
-    const {data, isError, isLoading, error} = clientsApi.useFetchAllClientsQuery('')
-    const list = useSelector(takeList)
-    const clientId = useSelector(takeClientId)
-    const clientOrder = useSelector(takeClientOrder)
+    const { isError, isLoading, error} = clientsApi.useFetchAllClientsQuery('')
+    const list = useSelector(selectlist)
+    const clientId = useSelector(selectClientId)
+    const clientOrder = useSelector(selectClientOrder)
 
     const {t} = useTranslation()
 
@@ -100,7 +99,6 @@ const Table = () => {
             dragEndHandler={dragEndHandler}
             dragOverHandler={dragOverHandler}
             dropHandler={dropHandler}
-            clientOrder={clientOrder}
             />
     )
 }

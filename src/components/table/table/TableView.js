@@ -3,7 +3,7 @@ import Form from '../form/Form'
 import Modal from '../modal/Modal'
 import { useTranslation } from 'react-i18next'
 
-const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletClient, openModal, listSortId, listSortName, listSortUsername,  listSortCompany, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientOrder, clientId}) => {
+const TableView = ({onFormChange, formActive, onModalChange, modalActive, deletClient, openModal, listSortId, listSortName, listSortUsername,  listSortCompany, list, selectClient, dragStartHandler, dragEndHandler, dragOverHandler, dropHandler, clientId}) => {
 
     const dispatch = useDispatch()
     const {t} = useTranslation()
