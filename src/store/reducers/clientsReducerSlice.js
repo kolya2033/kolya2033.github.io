@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import asyncListLoaded from "../async/apiTable";
+import { clientsApi } from "../../services/clientsquery";
 
 
 const clientsReducerSlice = createSlice({
@@ -86,22 +87,13 @@ const clientsReducerSlice = createSlice({
             state.clientOrder = action.payload.order
         }
     },
-    extraReducers: {
-        
-        [asyncListLoaded.pending]: (state) => {
-            state.loading = true
-            state.error = false
-            state.list = []
-        },
-        [asyncListLoaded.fulfilled]: (state, action) => {
-            state.loading = false
-            state.error = false
-            state.list = action.payload
-        },
-        [asyncListLoaded.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.payload
-        }
+    extraReducers: (build) => {
+        build.addMatcher(
+            clientsApi.endpoints.fetchAllClients.matchFulfilled,
+            (state, {payload}) => {
+                state.list = payload
+            }
+        )
     },
 })
 

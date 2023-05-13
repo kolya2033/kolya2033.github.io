@@ -5,6 +5,7 @@ import TableView from './TableView'
 import {takeClientId, takeClientOrder, takeList } from '../../../store/reducers/selectors'
 import asyncListLoaded from '../../../store/async/apiTable'
 import { useTranslation } from 'react-i18next'
+import { clientsApi } from '../../../services/clientsquery'
 
 const Table = () => {
 
@@ -13,17 +14,13 @@ const Table = () => {
     const [modalActive, setModalActive] = useState(false)
     const [formActive, setFormActive] = useState(false)
 
+    const {data, isError, isLoading, error} = clientsApi.useFetchAllClientsQuery('')
     const list = useSelector(takeList)
     const clientId = useSelector(takeClientId)
     const clientOrder = useSelector(takeClientOrder)
-    const error = useSelector(state => state.error)
-    const loading = useSelector(state => state.loading)
 
     const {t} = useTranslation()
 
-    useEffect(() => {
-        dispatch(asyncListLoaded())
-    }, [])
     useEffect(() => {
         window.addEventListener('keydown', onkeyDown)
         return function() {
@@ -71,15 +68,15 @@ const Table = () => {
         dispatch(onDropHandler(item))
     }
 
-    if (loading) {
+    if (isLoading) {
         return (
             <div className='loading'>{t("loading.loading")}</div>
         )
     }
 
-    if (error) {
+    if (isError) {
         return (
-            <div className='loading error'>{t("loading.error")}</div>
+            <div className='loading error'>{t("loading.error")}: "{error.status}"</div>
         )
     }
 
