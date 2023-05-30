@@ -28,7 +28,7 @@ const App = () => {
 
     const isSticky = () => {
         const scrollTop = window.scrollY;
-        setFixedHeader(scrollTop >= 250 ? true : false)
+        setFixedHeader(scrollTop >= 250)
     };    
 
     return (
